@@ -44,6 +44,8 @@ const alphabet = [
 const letterDisplay = document.getElementById('current-letter');
 const letterWord = document.getElementById('letter-word');
 const backgroundScene = document.getElementById('background-scene');
+const farBackground = document.getElementById('far-background');
+const ground = document.getElementById('ground');
 const racers = document.querySelectorAll('.racer');
 const finishLine = document.getElementById('finish-line');
 const instructions = document.getElementById('instructions');
@@ -105,7 +107,7 @@ function announceLetter() {
 
 // Position finish line
 function positionFinishLine() {
-    finishLine.style.right = '-200px';
+    finishLine.style.transform = 'translateX(0)';
     finishLine.classList.remove('visible');
 }
 
@@ -125,9 +127,6 @@ function moveRacers() {
             maxPosition = game.racerPositions[index];
         }
 
-        // Update racer position
-        racer.style.left = (50 + game.racerPositions[index]) + 'px';
-
         // Check if this racer won
         if (game.racerPositions[index] >= game.finishLinePosition && !game.finished) {
             game.finished = true;
@@ -135,6 +134,14 @@ function moveRacers() {
             endRace(racer);
         }
     });
+
+    // Scroll the background based on the leader's position (move left as they progress)
+    // Use parallax scrolling: far background moves slower
+    const scrollOffset = -maxPosition;
+    ground.style.transform = `translateX(${scrollOffset}px)`;
+    backgroundScene.style.transform = `translateX(${scrollOffset}px)`;
+    farBackground.style.transform = `translateX(${scrollOffset * 0.3}px)`;
+    finishLine.style.transform = `translateX(${scrollOffset}px)`;
 
     // Update letter based on progress
     const letterProgress = Math.floor(maxPosition / 100);
@@ -182,10 +189,11 @@ function resetGame() {
     game.racerPositions = [0, 0, 0, 0, 0];
     game.winner = null;
 
-    // Reset racer positions
-    racers.forEach(racer => {
-        racer.style.left = '50px';
-    });
+    // Reset background scroll positions
+    ground.style.transform = 'translateX(0)';
+    backgroundScene.style.transform = 'translateX(0)';
+    farBackground.style.transform = 'translateX(0)';
+    finishLine.style.transform = 'translateX(0)';
 
     // Reset displays
     updateLetterDisplay();
