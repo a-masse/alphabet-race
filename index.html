@@ -14,39 +14,136 @@
             <div id="letter-word">Apples</div>
         </div>
 
+        <!-- Background Layers -->
+        <div id="sky-layer"></div>
+        <div id="far-background"></div>
+        <div id="background-scene"></div>
+
         <!-- Race Track -->
         <div id="race-track">
-            <!-- Background Scene -->
-            <div id="background-scene"></div>
+            <!-- Ground -->
+            <div id="ground"></div>
 
-            <!-- Racers -->
-            <div class="racer" id="racer1" data-name="Siamese Cat">
-                <div class="racer-character">🐱</div>
+            <!-- Racers with CSS Illustrations -->
+            <div class="racer" id="racer1" data-name="Flame">
+                <div class="racer-character flame-cat">
+                    <div class="cat-ear cat-ear-left"></div>
+                    <div class="cat-ear cat-ear-right"></div>
+                    <div class="cat-head">
+                        <div class="cat-face-marking"></div>
+                        <div class="cat-eye cat-eye-left"></div>
+                        <div class="cat-eye cat-eye-right"></div>
+                        <div class="cat-nose"></div>
+                    </div>
+                    <div class="cat-body">
+                        <div class="cat-stripe cat-stripe-1"></div>
+                        <div class="cat-stripe cat-stripe-2"></div>
+                    </div>
+                    <div class="cat-tail"></div>
+                    <div class="cat-leg cat-leg-1"></div>
+                    <div class="cat-leg cat-leg-2"></div>
+                </div>
                 <div class="racer-label">Flame</div>
             </div>
 
-            <div class="racer" id="racer2" data-name="Tall Tabby">
-                <div class="racer-character">😛🐱</div>
+            <div class="racer" id="racer2" data-name="Silly">
+                <div class="racer-character tall-tabby">
+                    <div class="cat-ear cat-ear-left"></div>
+                    <div class="cat-ear cat-ear-right"></div>
+                    <div class="cat-head tall">
+                        <div class="tabby-stripe"></div>
+                        <div class="cat-eye cat-eye-left"></div>
+                        <div class="cat-eye cat-eye-right"></div>
+                        <div class="cat-nose"></div>
+                        <div class="cat-tongue"></div>
+                    </div>
+                    <div class="cat-body skinny">
+                        <div class="cat-stripe cat-stripe-1"></div>
+                        <div class="cat-stripe cat-stripe-2"></div>
+                        <div class="cat-stripe cat-stripe-3"></div>
+                        <div class="white-chest"></div>
+                    </div>
+                    <div class="cat-tail striped"></div>
+                    <div class="cat-leg cat-leg-1 white-paw"></div>
+                    <div class="cat-leg cat-leg-2 white-paw"></div>
+                </div>
                 <div class="racer-label">Silly</div>
             </div>
 
-            <div class="racer" id="racer3" data-name="Stout Tabby">
-                <div class="racer-character">😾🐱</div>
+            <div class="racer" id="racer3" data-name="Grumpy">
+                <div class="racer-character stout-tabby">
+                    <div class="cat-ear cat-ear-left"></div>
+                    <div class="cat-ear cat-ear-right"></div>
+                    <div class="cat-head stout">
+                        <div class="tabby-stripe"></div>
+                        <div class="cat-eye cat-eye-left grumpy"></div>
+                        <div class="cat-eye cat-eye-right grumpy"></div>
+                        <div class="cat-nose"></div>
+                        <div class="cat-frown"></div>
+                    </div>
+                    <div class="cat-body wide">
+                        <div class="cat-stripe cat-stripe-1"></div>
+                        <div class="cat-stripe cat-stripe-2"></div>
+                        <div class="cat-stripe cat-stripe-3"></div>
+                        <div class="white-chest"></div>
+                    </div>
+                    <div class="cat-tail striped short"></div>
+                    <div class="cat-leg cat-leg-1 white-paw"></div>
+                    <div class="cat-leg cat-leg-2 white-paw"></div>
+                </div>
                 <div class="racer-label">Grumpy</div>
             </div>
 
             <div class="racer" id="racer4" data-name="Princess">
-                <div class="racer-character">👸</div>
+                <div class="racer-character princess">
+                    <div class="princess-crown"></div>
+                    <div class="princess-head">
+                        <div class="princess-eye princess-eye-left"></div>
+                        <div class="princess-eye princess-eye-right"></div>
+                        <div class="princess-smile"></div>
+                    </div>
+                    <div class="princess-dress">
+                        <div class="dress-sparkle"></div>
+                        <div class="dress-sparkle"></div>
+                        <div class="dress-sparkle"></div>
+                    </div>
+                    <div class="princess-arm princess-arm-left"></div>
+                    <div class="princess-arm princess-arm-right"></div>
+                </div>
                 <div class="racer-label">Princess</div>
             </div>
 
             <div class="racer" id="racer5" data-name="Monster">
-                <div class="racer-character">👹</div>
+                <div class="racer-character monster">
+                    <div class="monster-horn monster-horn-left"></div>
+                    <div class="monster-horn monster-horn-right"></div>
+                    <div class="monster-head">
+                        <div class="monster-eye monster-eye-left"></div>
+                        <div class="monster-eye monster-eye-right"></div>
+                        <div class="monster-mouth">
+                            <div class="monster-tooth"></div>
+                            <div class="monster-tooth"></div>
+                        </div>
+                    </div>
+                    <div class="monster-body">
+                        <div class="monster-spot"></div>
+                        <div class="monster-spot"></div>
+                        <div class="monster-spot"></div>
+                    </div>
+                    <div class="monster-arm monster-arm-left"></div>
+                    <div class="monster-arm monster-arm-right"></div>
+                    <div class="monster-leg monster-leg-1"></div>
+                    <div class="monster-leg monster-leg-2"></div>
+                </div>
                 <div class="racer-label">Monster</div>
             </div>
 
             <!-- Finish Line -->
-            <div id="finish-line">🏁</div>
+            <div id="finish-line">
+                <div class="finish-post"></div>
+                <div class="finish-banner">FINISH!</div>
+                <div class="finish-post"></div>
+            </div>
         </div>
 
         <!-- Instructions -->

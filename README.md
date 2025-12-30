@@ -1,15 +1,23 @@
 # 🏁 Juniper's Alphabet Race! 🎮
 
-A fun, educational racing game for toddlers that combines button-mashing fun with alphabet learning!
+A beautiful, educational racing game for toddlers that combines button-mashing fun with alphabet learning!
 
 ## 🎯 Features
 
-- **5 Adorable Racers**: Siamese cat, two tabbies, a princess, and a monster
+- **5 Hand-Illustrated Racers**:
+  - 🐱 **Flame** - Flame Point Siamese cat with creamy colors
+  - 😛 **Silly** - Tall skinny Black Mackerel Tabby with tongue sticking out
+  - 😾 **Grumpy** - Stout wide Black Mackerel Tabby with intense look
+  - 👸 **Princess** - Sparkly dress and golden crown
+  - 👹 **Monster** - Sulley-style friendly monster with horns
 - **Simple Controls**: Just press SPACE or TAP to make everyone race!
 - **Alphabet Learning**: Race through all 26 letters from A to Z
+- **Layered Parallax Scenes**: Beautiful sky, background, and themed foreground items
 - **Themed Backgrounds**: Each letter has fun themed emojis (Apples, Bumblebees, Zebras, etc.)
 - **Audio Announcements**: Hear each letter announced out loud as you race
 - **Random Winner**: Different winner every time for replay value!
+- **Smooth Animations**: Characters run, legs move, tongues wag, dresses sparkle!
+- **Great Vertical Spacing**: Easy to see all racers at once
 - **Mobile Friendly**: Works great on phones and tablets
 
 ## 🚀 How to Play
@@ -23,18 +31,27 @@ A fun, educational racing game for toddlers that combines button-mashing fun wit
 
 ## 🎨 Customization Ideas
 
-### Adding Real Character Images
+### Customizing Character Appearance
 
-The game currently uses emojis, but you can easily add custom character images:
+The characters are built with pure CSS! You can customize them by editing `styles.css`:
+
+- **Change cat colors**: Look for the `.flame-cat`, `.tall-tabby`, `.stout-tabby` sections
+- **Adjust character sizes**: Modify the `.racer-character` width and height
+- **Change princess dress color**: Update the `.princess-dress` gradient colors
+- **Modify monster appearance**: Edit `.monster` colors and features
+
+### Replacing with Custom Images
+
+Want to use actual photos or illustrations? Easy:
 
 1. Add image files to an `images/` folder
-2. Update the `.racer-character` divs in `index.html`:
+2. Replace the CSS-illustrated character with an image:
    ```html
    <div class="racer-character">
-       <img src="images/siamese-cat.png" alt="Flame">
+       <img src="images/flame-cat.png" alt="Flame" style="width: 120px; height: 120px;">
    </div>
    ```
-3. Adjust the CSS in `styles.css` to style the images
+3. Comment out or remove the complex CSS for that character
 
 ### Changing the Alphabet Words
 

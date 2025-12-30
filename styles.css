@@ -7,10 +7,11 @@
 body {
     font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
     overflow: hidden;
-    background: linear-gradient(to bottom, #87CEEB 0%, #98D8E8 100%);
     touch-action: none;
     -webkit-user-select: none;
     user-select: none;
+    position: relative;
+    height: 100vh;
 }
 
 #game-container {
@@ -20,163 +21,854 @@ body {
     overflow: hidden;
 }
 
-/* Letter Display */
+/* ===== SKY LAYER ===== */
+#sky-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to bottom,
+        #87CEEB 0%,
+        #B0D4E8 50%,
+        #FFE5B4 100%);
+    z-index: 1;
+}
+
+/* ===== FAR BACKGROUND (Mountains, clouds, etc) ===== */
+#far-background {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    z-index: 2;
+    background: linear-gradient(to bottom, transparent 0%, #90EE90 100%);
+}
+
+/* ===== BACKGROUND SCENE (Letter-specific items) ===== */
+#background-scene {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding: 40px;
+    font-size: 100px;
+    overflow: visible;
+}
+
+/* ===== GROUND ===== */
+#ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to bottom,
+        #7EC850 0%,
+        #6DB843 50%,
+        #5CA836 100%);
+    z-index: 4;
+    box-shadow: inset 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== RACE TRACK ===== */
+#race-track {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 5;
+}
+
+/* ===== LETTER DISPLAY ===== */
 #letter-display {
     position: absolute;
-    top: 20px;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+    padding: 25px 50px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3),
+                inset 0 -5px 10px rgba(0,0,0,0.2);
+    border: 5px solid white;
 }
 
 #current-letter {
-    font-size: 120px;
+    font-size: 140px;
     font-weight: bold;
-    color: #FF6B6B;
-    text-shadow: 4px 4px 0px #FFE66D;
+    color: white;
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.3);
     line-height: 1;
     animation: letterBounce 0.5s ease;
 }
 
 #letter-word {
-    font-size: 48px;
+    font-size: 52px;
     font-weight: bold;
-    color: #4ECDC4;
+    color: white;
     margin-top: 10px;
-    text-shadow: 2px 2px 0px #95E1D3;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
 }
 
 @keyframes letterBounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+    0%, 100% { transform: scale(1) rotate(-2deg); }
+    50% { transform: scale(1.15) rotate(2deg); }
 }
 
-/* Race Track */
-#race-track {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60%;
-    background: linear-gradient(to bottom,
-        transparent 0%,
-        #90EE90 20%,
-        #7EC850 100%);
-    overflow: hidden;
-}
-
-/* Background Scene */
-#background-scene {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    font-size: 80px;
-    display: flex;
-    align-items: center;
-    gap: 100px;
-    padding: 20px;
-    transition: transform 0.3s ease-out;
-}
-
-/* Racers */
+/* ===== RACERS BASE ===== */
 .racer {
     position: absolute;
-    left: 50px;
+    left: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: left 0.1s linear;
-    filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.3));
+    transition: left 0.08s linear;
+    filter: drop-shadow(6px 6px 8px rgba(0,0,0,0.4));
+    z-index: 10;
 }
 
 .racer-character {
-    font-size: 80px;
-    line-height: 1;
-    animation: bounce 0.3s ease-in-out infinite;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    animation: running 0.4s ease-in-out infinite;
+}
+
+@keyframes running {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    25% { transform: translateY(-8px) scaleY(0.95); }
+    50% { transform: translateY(-12px) scaleY(0.92); }
+    75% { transform: translateY(-8px) scaleY(0.95); }
 }
 
 .racer-label {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: white;
-    background: rgba(0,0,0,0.6);
-    padding: 5px 10px;
-    border-radius: 10px;
-    margin-top: 5px;
+    background: rgba(0,0,0,0.7);
+    padding: 8px 16px;
+    border-radius: 15px;
+    margin-top: 10px;
     white-space: nowrap;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+/* Position each racer with MORE VERTICAL SPACING */
+#racer1 { bottom: 70%; }
+#racer2 { bottom: 57%; }
+#racer3 { bottom: 44%; }
+#racer4 { bottom: 31%; }
+#racer5 { bottom: 18%; }
+
+/* ===== FLAME POINT SIAMESE CAT ===== */
+.flame-cat {
+    width: 110px;
+    height: 100px;
 }
 
-/* Position each racer vertically */
-#racer1 { bottom: 60%; }
-#racer2 { bottom: 50%; }
-#racer3 { bottom: 40%; }
-#racer4 { bottom: 30%; }
-#racer5 { bottom: 20%; }
+.flame-cat .cat-head {
+    position: absolute;
+    width: 50px;
+    height: 45px;
+    background: linear-gradient(135deg, #FFE4CC 0%, #FFD9B3 100%);
+    border-radius: 50% 50% 45% 45%;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
 
-/* Finish Line */
+.flame-cat .cat-face-marking {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, #FFCCAA 0%, #FFB088 100%);
+    border-radius: 50%;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.flame-cat .cat-ear {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #FFE4CC 0%, #FFCCAA 100%);
+    border-radius: 80% 20% 20% 20%;
+    top: 10px;
+    z-index: 2;
+}
+
+.flame-cat .cat-ear-left {
+    left: 10px;
+    transform: rotate(-25deg);
+}
+
+.flame-cat .cat-ear-right {
+    right: 10px;
+    transform: rotate(25deg);
+}
+
+.cat-eye {
+    position: absolute;
+    width: 10px;
+    height: 12px;
+    background: radial-gradient(circle, #4A90E2 0%, #2E5C8A 100%);
+    border-radius: 50% 50% 50% 50%;
+    top: 18px;
+}
+
+.cat-eye-left { left: 10px; }
+.cat-eye-right { right: 10px; }
+
+.cat-nose {
+    position: absolute;
+    width: 8px;
+    height: 6px;
+    background: #FFB3D9;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.flame-cat .cat-body {
+    position: absolute;
+    width: 65px;
+    height: 45px;
+    background: linear-gradient(180deg, #FFEADD 0%, #FFE4CC 100%);
+    border-radius: 50% 50% 40% 40%;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.flame-cat .cat-stripe {
+    position: absolute;
+    height: 3px;
+    background: rgba(255, 179, 133, 0.4);
+    border-radius: 2px;
+}
+
+.flame-cat .cat-stripe-1 {
+    width: 30px;
+    top: 15px;
+    left: 10px;
+}
+
+.flame-cat .cat-stripe-2 {
+    width: 25px;
+    top: 25px;
+    right: 12px;
+}
+
+.cat-tail {
+    position: absolute;
+    width: 40px;
+    height: 15px;
+    background: linear-gradient(90deg, #FFE4CC 0%, #FFCCAA 100%);
+    border-radius: 50%;
+    bottom: 30px;
+    right: 0px;
+    transform: rotate(-20deg);
+    z-index: 0;
+}
+
+.cat-leg {
+    position: absolute;
+    width: 12px;
+    height: 25px;
+    background: linear-gradient(180deg, #FFE4CC 0%, #FFCCAA 100%);
+    border-radius: 20% 20% 40% 40%;
+    bottom: 5px;
+    animation: legMove 0.4s ease-in-out infinite;
+}
+
+.cat-leg-1 {
+    left: 25px;
+}
+
+.cat-leg-2 {
+    right: 25px;
+    animation-delay: 0.2s;
+}
+
+@keyframes legMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
+
+/* ===== TALL SKINNY TABBY ===== */
+.tall-tabby {
+    width: 100px;
+    height: 120px;
+}
+
+.tall-tabby .cat-head {
+    position: absolute;
+    width: 45px;
+    height: 55px;
+    background: linear-gradient(135deg, #4A4A4A 0%, #333333 100%);
+    border-radius: 50% 50% 48% 48%;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.tall-tabby .cat-head.tall {
+    height: 60px;
+}
+
+.tabby-stripe {
+    position: absolute;
+    width: 100%;
+    height: 15px;
+    background: repeating-linear-gradient(
+        90deg,
+        #2A2A2A 0px,
+        #2A2A2A 3px,
+        transparent 3px,
+        transparent 6px
+    );
+    top: 10px;
+    border-radius: 50%;
+}
+
+.tall-tabby .cat-ear {
+    background: linear-gradient(135deg, #4A4A4A 0%, #333333 100%);
+}
+
+.tall-tabby .cat-tongue {
+    position: absolute;
+    width: 12px;
+    height: 16px;
+    background: #FF69B4;
+    border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: tongueWag 0.6s ease-in-out infinite;
+}
+
+@keyframes tongueWag {
+    0%, 100% { transform: translateX(-50%) rotate(-5deg); }
+    50% { transform: translateX(-50%) rotate(5deg); }
+}
+
+.tall-tabby .cat-body.skinny {
+    position: absolute;
+    width: 50px;
+    height: 55px;
+    background: linear-gradient(180deg, #4A4A4A 0%, #333333 100%);
+    border-radius: 45% 45% 40% 40%;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.white-chest {
+    position: absolute;
+    width: 25px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tall-tabby .cat-stripe {
+    background: #2A2A2A;
+    height: 4px;
+    position: absolute;
+}
+
+.tall-tabby .cat-stripe-1 {
+    width: 25px;
+    top: 10px;
+    left: 8px;
+}
+
+.tall-tabby .cat-stripe-2 {
+    width: 22px;
+    top: 20px;
+    right: 10px;
+}
+
+.tall-tabby .cat-stripe-3 {
+    width: 20px;
+    top: 30px;
+    left: 12px;
+}
+
+.cat-tail.striped {
+    background: repeating-linear-gradient(
+        90deg,
+        #4A4A4A 0px,
+        #4A4A4A 6px,
+        #2A2A2A 6px,
+        #2A2A2A 12px
+    );
+}
+
+.tall-tabby .cat-leg {
+    background: linear-gradient(180deg, #4A4A4A 0%, #333333 100%);
+}
+
+.cat-leg.white-paw::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    background: white;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+}
+
+/* ===== STOUT GRUMPY TABBY ===== */
+.stout-tabby {
+    width: 130px;
+    height: 90px;
+}
+
+.stout-tabby .cat-head.stout {
+    width: 55px;
+    height: 50px;
+}
+
+.stout-tabby .cat-head {
+    background: linear-gradient(135deg, #4A4A4A 0%, #333333 100%);
+}
+
+.stout-tabby .cat-ear {
+    background: linear-gradient(135deg, #4A4A4A 0%, #333333 100%);
+}
+
+.cat-eye.grumpy {
+    height: 6px;
+    border-radius: 50% 50% 50% 50%;
+    background: #E8C547;
+}
+
+.cat-frown {
+    position: absolute;
+    width: 20px;
+    height: 8px;
+    border: 2px solid #2A2A2A;
+    border-top: none;
+    border-radius: 0 0 50% 50%;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.stout-tabby .cat-body.wide {
+    width: 85px;
+    height: 50px;
+    background: linear-gradient(180deg, #4A4A4A 0%, #333333 100%);
+}
+
+.cat-tail.short {
+    width: 30px;
+}
+
+/* ===== PRINCESS ===== */
+.princess {
+    width: 100px;
+    height: 110px;
+}
+
+.princess-crown {
+    position: absolute;
+    width: 50px;
+    height: 25px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    clip-path: polygon(
+        0% 100%, 20% 30%, 25% 100%,
+        45% 40%, 50% 100%,
+        55% 40%, 75% 100%,
+        80% 30%, 100% 100%
+    );
+    z-index: 5;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.princess-head {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle at 30% 30%, #FFD4A3 0%, #FFB380 100%);
+    border-radius: 50%;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+}
+
+.princess-eye {
+    position: absolute;
+    width: 8px;
+    height: 10px;
+    background: #2C3E50;
+    border-radius: 50%;
+    top: 20px;
+    animation: blink 3s ease-in-out infinite;
+}
+
+.princess-eye-left { left: 12px; }
+.princess-eye-right { right: 12px; }
+
+@keyframes blink {
+    0%, 96%, 100% { transform: scaleY(1); }
+    98% { transform: scaleY(0.1); }
+}
+
+.princess-smile {
+    position: absolute;
+    width: 16px;
+    height: 10px;
+    border: 2px solid #E74C3C;
+    border-top: none;
+    border-radius: 0 0 50% 50%;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.princess-dress {
+    position: absolute;
+    width: 70px;
+    height: 50px;
+    background: linear-gradient(180deg, #FF69B4 0%, #FF1493 100%);
+    border-radius: 50% 50% 60% 60%;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    overflow: hidden;
+}
+
+.dress-sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.dress-sparkle:nth-child(1) {
+    top: 15px;
+    left: 15px;
+}
+
+.dress-sparkle:nth-child(2) {
+    top: 25px;
+    right: 15px;
+    animation-delay: 0.5s;
+}
+
+.dress-sparkle:nth-child(3) {
+    bottom: 10px;
+    left: 30px;
+    animation-delay: 1s;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.princess-arm {
+    position: absolute;
+    width: 12px;
+    height: 35px;
+    background: #FFD4A3;
+    border-radius: 50%;
+    top: 50px;
+    z-index: 1;
+    animation: armSwing 0.4s ease-in-out infinite;
+}
+
+.princess-arm-left {
+    left: 15px;
+}
+
+.princess-arm-right {
+    right: 15px;
+    animation-delay: 0.2s;
+}
+
+@keyframes armSwing {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+/* ===== MONSTER (SULLEY STYLE) ===== */
+.monster {
+    width: 110px;
+    height: 110px;
+}
+
+.monster-horn {
+    position: absolute;
+    width: 12px;
+    height: 20px;
+    background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+    border-radius: 50% 50% 20% 20%;
+    top: 5px;
+    z-index: 3;
+}
+
+.monster-horn-left {
+    left: 15px;
+    transform: rotate(-15deg);
+}
+
+.monster-horn-right {
+    right: 15px;
+    transform: rotate(15deg);
+}
+
+.monster-head {
+    position: absolute;
+    width: 60px;
+    height: 55px;
+    background: linear-gradient(135deg, #00CED1 0%, #008B8B 100%);
+    border-radius: 45% 45% 50% 50%;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+}
+
+.monster-eye {
+    position: absolute;
+    width: 14px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 15px;
+    border: 2px solid #333;
+}
+
+.monster-eye::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    top: 4px;
+    left: 3px;
+}
+
+.monster-eye-left { left: 10px; }
+.monster-eye-right { right: 10px; }
+
+.monster-mouth {
+    position: absolute;
+    width: 30px;
+    height: 15px;
+    background: #8B4513;
+    border-radius: 0 0 50% 50%;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.monster-tooth {
+    position: absolute;
+    width: 6px;
+    height: 8px;
+    background: white;
+    border-radius: 50% 50% 50% 50%;
+    top: 0;
+}
+
+.monster-tooth:nth-child(1) { left: 6px; }
+.monster-tooth:nth-child(2) { right: 6px; }
+
+.monster-body {
+    position: absolute;
+    width: 75px;
+    height: 50px;
+    background: linear-gradient(180deg, #00CED1 0%, #008B8B 100%);
+    border-radius: 40% 40% 50% 50%;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.monster-spot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(0, 105, 105, 0.4);
+    border-radius: 50%;
+}
+
+.monster-spot:nth-child(1) {
+    top: 10px;
+    left: 15px;
+}
+
+.monster-spot:nth-child(2) {
+    top: 20px;
+    right: 20px;
+}
+
+.monster-spot:nth-child(3) {
+    bottom: 10px;
+    left: 30px;
+}
+
+.monster-arm {
+    position: absolute;
+    width: 15px;
+    height: 40px;
+    background: linear-gradient(180deg, #00CED1 0%, #008B8B 100%);
+    border-radius: 50%;
+    top: 50px;
+    z-index: 1;
+    animation: armSwing 0.4s ease-in-out infinite;
+}
+
+.monster-arm-left {
+    left: 10px;
+}
+
+.monster-arm-right {
+    right: 10px;
+    animation-delay: 0.2s;
+}
+
+.monster-leg {
+    position: absolute;
+    width: 18px;
+    height: 30px;
+    background: linear-gradient(180deg, #00CED1 0%, #008B8B 100%);
+    border-radius: 40% 40% 50% 50%;
+    bottom: 5px;
+    animation: legMove 0.4s ease-in-out infinite;
+}
+
+.monster-leg-1 {
+    left: 20px;
+}
+
+.monster-leg-2 {
+    right: 20px;
+    animation-delay: 0.2s;
+}
+
+/* ===== FINISH LINE ===== */
 #finish-line {
     position: absolute;
-    right: -200px;
+    right: -250px;
     top: 0;
     bottom: 0;
-    width: 150px;
-    font-size: 150px;
+    width: 200px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: repeating-linear-gradient(
-        45deg,
-        #000,
-        #000 20px,
-        #fff 20px,
-        #fff 40px
-    );
     opacity: 0;
     transition: opacity 0.5s ease;
+    z-index: 50;
 }
 
 #finish-line.visible {
     opacity: 1;
 }
 
-/* Instructions */
+.finish-post {
+    width: 20px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        #000 0px,
+        #000 30px,
+        #fff 30px,
+        #fff 60px
+    );
+    position: absolute;
+}
+
+.finish-post:first-child {
+    left: 20px;
+}
+
+.finish-post:last-child {
+    right: 20px;
+}
+
+.finish-banner {
+    font-size: 48px;
+    font-weight: bold;
+    color: #FF6B6B;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 20px;
+    border: 5px solid #FF6B6B;
+    transform: rotate(-10deg);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    z-index: 51;
+    animation: bannerWave 1s ease-in-out infinite;
+}
+
+@keyframes bannerWave {
+    0%, 100% { transform: rotate(-10deg) translateY(0); }
+    50% { transform: rotate(-10deg) translateY(-10px); }
+}
+
+/* ===== INSTRUCTIONS ===== */
 #instructions {
     position: absolute;
-    bottom: 80px;
+    bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
 }
 
 .instruction-text {
-    font-size: 36px;
+    font-size: 42px;
     font-weight: bold;
     color: white;
-    background: rgba(255, 107, 107, 0.9);
-    padding: 20px 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    animation: pulse 1.5s ease-in-out infinite;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+    padding: 20px 50px;
+    border-radius: 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    animation: instructionPulse 2s ease-in-out infinite;
     text-align: center;
+    border: 4px solid white;
 }
 
-@keyframes pulse {
+@keyframes instructionPulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    50% { transform: scale(1.08); }
 }
 
-/* Winner Display */
+/* ===== WINNER DISPLAY ===== */
 #winner-display {
     position: absolute;
     top: 50%;
@@ -184,10 +876,11 @@ body {
     transform: translate(-50%, -50%);
     z-index: 200;
     text-align: center;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 60px;
-    border-radius: 30px;
-    box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg, #FFE66D 0%, #FFD93D 100%);
+    padding: 70px 90px;
+    border-radius: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 8px solid white;
 }
 
 #winner-display.hidden {
@@ -195,69 +888,90 @@ body {
 }
 
 #winner-text {
-    font-size: 72px;
+    font-size: 82px;
     font-weight: bold;
-    color: #FF6B6B;
-    text-shadow: 3px 3px 0px #FFE66D;
-    margin-bottom: 30px;
-    animation: celebrate 0.5s ease-in-out infinite alternate;
+    color: #2C3E50;
+    text-shadow: 4px 4px 0px rgba(255,255,255,0.5);
+    margin-bottom: 40px;
+    animation: celebrate 0.6s ease-in-out infinite alternate;
 }
 
 @keyframes celebrate {
-    from { transform: rotate(-5deg) scale(1); }
-    to { transform: rotate(5deg) scale(1.1); }
+    from { transform: rotate(-3deg) scale(1); }
+    to { transform: rotate(3deg) scale(1.05); }
 }
 
 #replay-button {
-    font-size: 48px;
+    font-size: 52px;
     font-weight: bold;
     color: white;
-    background: #4ECDC4;
-    padding: 20px 40px;
-    border-radius: 20px;
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A3A0 100%);
+    padding: 25px 50px;
+    border-radius: 25px;
     cursor: pointer;
-    box-shadow: 0 8px 0 #3AAFA9;
+    box-shadow: 0 10px 0 #3AAFA9;
     transition: transform 0.1s ease;
     display: inline-block;
+    border: 5px solid white;
 }
 
 #replay-button:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 }
 
 #replay-button:active {
-    transform: translateY(4px);
-    box-shadow: 0 4px 0 #3AAFA9;
+    transform: translateY(5px);
+    box-shadow: 0 5px 0 #3AAFA9;
 }
 
-/* Mobile optimizations */
+/* ===== MOBILE OPTIMIZATIONS ===== */
 @media (max-width: 768px) {
     #current-letter {
-        font-size: 80px;
+        font-size: 90px;
     }
 
     #letter-word {
-        font-size: 32px;
+        font-size: 36px;
     }
 
     .racer-character {
-        font-size: 60px;
+        width: 90px;
+        height: 90px;
     }
 
     .racer-label {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .instruction-text {
-        font-size: 28px;
-        padding: 15px 30px;
+        font-size: 32px;
+        padding: 15px 35px;
     }
 
     #winner-text {
-        font-size: 48px;
+        font-size: 56px;
     }
 
     #replay-button {
-        font-size: 36px;
+        font-size: 40px;
+    }
+
+    #background-scene {
+        font-size: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .racer-character {
+        width: 70px;
+        height: 70px;
+    }
+
+    #current-letter {
+        font-size: 70px;
+    }
+
+    #letter-word {
+        font-size: 28px;
     }
 }
