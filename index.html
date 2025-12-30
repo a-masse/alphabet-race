@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Juniper's Alphabet Race! 🏁</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Letter Display -->
+        <div id="letter-display">
+            <div id="current-letter">A</div>
+            <div id="letter-word">Apples</div>
+        </div>
+
+        <!-- Race Track -->
+        <div id="race-track">
+            <!-- Background Scene -->
+            <div id="background-scene"></div>
+
+            <!-- Racers -->
+            <div class="racer" id="racer1" data-name="Siamese Cat">
+                <div class="racer-character">🐱</div>
+                <div class="racer-label">Flame</div>
+            </div>
+
+            <div class="racer" id="racer2" data-name="Tall Tabby">
+                <div class="racer-character">😛🐱</div>
+                <div class="racer-label">Silly</div>
+            </div>
+
+            <div class="racer" id="racer3" data-name="Stout Tabby">
+                <div class="racer-character">😾🐱</div>
+                <div class="racer-label">Grumpy</div>
+            </div>
+
+            <div class="racer" id="racer4" data-name="Princess">
+                <div class="racer-character">👸</div>
+                <div class="racer-label">Princess</div>
+            </div>
+
+            <div class="racer" id="racer5" data-name="Monster">
+                <div class="racer-character">👹</div>
+                <div class="racer-label">Monster</div>
+            </div>
+
+            <!-- Finish Line -->
+            <div id="finish-line">🏁</div>
+        </div>
+
+        <!-- Instructions -->
+        <div id="instructions">
+            <div class="instruction-text">Press SPACE or TAP to race! 🎮</div>
+        </div>
+
+        <!-- Winner Display -->
+        <div id="winner-display" class="hidden">
+            <div id="winner-text"></div>
+            <div id="replay-button">Race Again! 🔄</div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

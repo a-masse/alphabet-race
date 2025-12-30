@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #87CEEB 0%, #98D8E8 100%);
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Letter Display */
+#letter-display {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+#current-letter {
+    font-size: 120px;
+    font-weight: bold;
+    color: #FF6B6B;
+    text-shadow: 4px 4px 0px #FFE66D;
+    line-height: 1;
+    animation: letterBounce 0.5s ease;
+}
+
+#letter-word {
+    font-size: 48px;
+    font-weight: bold;
+    color: #4ECDC4;
+    margin-top: 10px;
+    text-shadow: 2px 2px 0px #95E1D3;
+}
+
+@keyframes letterBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Race Track */
+#race-track {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        #90EE90 20%,
+        #7EC850 100%);
+    overflow: hidden;
+}
+
+/* Background Scene */
+#background-scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    font-size: 80px;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    padding: 20px;
+    transition: transform 0.3s ease-out;
+}
+
+/* Racers */
+.racer {
+    position: absolute;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: left 0.1s linear;
+    filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.3));
+}
+
+.racer-character {
+    font-size: 80px;
+    line-height: 1;
+    animation: bounce 0.3s ease-in-out infinite;
+}
+
+.racer-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: rgba(0,0,0,0.6);
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+    white-space: nowrap;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Position each racer vertically */
+#racer1 { bottom: 60%; }
+#racer2 { bottom: 50%; }
+#racer3 { bottom: 40%; }
+#racer4 { bottom: 30%; }
+#racer5 { bottom: 20%; }
+
+/* Finish Line */
+#finish-line {
+    position: absolute;
+    right: -200px;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    font-size: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(
+        45deg,
+        #000,
+        #000 20px,
+        #fff 20px,
+        #fff 40px
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#finish-line.visible {
+    opacity: 1;
+}
+
+/* Instructions */
+#instructions {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.instruction-text {
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    background: rgba(255, 107, 107, 0.9);
+    padding: 20px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    animation: pulse 1.5s ease-in-out infinite;
+    text-align: center;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Winner Display */
+#winner-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 60px;
+    border-radius: 30px;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+}
+
+#winner-display.hidden {
+    display: none;
+}
+
+#winner-text {
+    font-size: 72px;
+    font-weight: bold;
+    color: #FF6B6B;
+    text-shadow: 3px 3px 0px #FFE66D;
+    margin-bottom: 30px;
+    animation: celebrate 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes celebrate {
+    from { transform: rotate(-5deg) scale(1); }
+    to { transform: rotate(5deg) scale(1.1); }
+}
+
+#replay-button {
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    background: #4ECDC4;
+    padding: 20px 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 8px 0 #3AAFA9;
+    transition: transform 0.1s ease;
+    display: inline-block;
+}
+
+#replay-button:hover {
+    transform: translateY(-4px);
+}
+
+#replay-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 #3AAFA9;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    #current-letter {
+        font-size: 80px;
+    }
+
+    #letter-word {
+        font-size: 32px;
+    }
+
+    .racer-character {
+        font-size: 60px;
+    }
+
+    .racer-label {
+        font-size: 16px;
+    }
+
+    .instruction-text {
+        font-size: 28px;
+        padding: 15px 30px;
+    }
+
+    #winner-text {
+        font-size: 48px;
+    }
+
+    #replay-button {
+        font-size: 36px;
+    }
+}
